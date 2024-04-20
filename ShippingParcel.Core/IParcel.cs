@@ -7,5 +7,6 @@
         int GetLimitDimensionInCm();
         void SetSpeedyShipping();
         int GetsSpeedyShippingCost();
+        void SetWeightInKg(int weight);
     }
 }

@@ -4,8 +4,11 @@ public class ExLargeParcel : IParcel
 {
     private bool _isSpeedyShipping { get; set; }
     private int _speedyShippingCost { get; set; }
+    private int _weight { get; set; }
+    public int OverweighCost { get; private set; }
 
-    public readonly int _originalCost = 25;
+    public readonly int OriginalCost = 25;
+    public readonly int OverweightInKgLimit = 10;
 
     public int GetLimitDimensionInCm()
     {
@@ -19,23 +22,33 @@ public class ExLargeParcel : IParcel
 
     public int GetTotalCost()
     {
-        int total = _originalCost;
+        int total = OriginalCost;
         if (_isSpeedyShipping)
         {
-            _speedyShippingCost = _originalCost * 2;
+            _speedyShippingCost = OriginalCost * 2;
             total += _speedyShippingCost;
         }
+        total += OverweighCost;
         return total;
     }
 
     public void SetSpeedyShipping()
     {
         _isSpeedyShipping = true;
-        _speedyShippingCost = _originalCost * 2;
+        _speedyShippingCost = OriginalCost * 2;
     }
 
     public int GetsSpeedyShippingCost()
     {
         return _speedyShippingCost;
+    }
+
+    public void SetWeightInKg(int weight)
+    {
+        _weight = weight;
+        if (_weight > OverweightInKgLimit)
+        {
+           OverweighCost = (_weight - OverweightInKgLimit) * 2;
+        }
     }
 }
