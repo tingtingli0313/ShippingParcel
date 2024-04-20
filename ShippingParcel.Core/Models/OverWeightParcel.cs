@@ -1,29 +1,31 @@
-﻿namespace ShippingParcel.Core.Models;
+﻿
 
-public class SmallParcel : IParcel
+namespace ShippingParcel.Core.Models;
+public class OverWeightParcel : IParcel
 {
     private bool _isSpeedyShipping { get; set; } = false;
     private int _speedyShippingCost { get; set; }
     public int OverweighCost { get; private set; }
     private int _weight { get; set; }
 
-    public readonly int OriginalCost = 3;
+    public readonly int OriginalCost = 50;
 
-    public readonly int OverweightInKgLimit = 1;
+    public readonly int OverweightInKgLimit = 50;
 
     public string GetParcelType()
     {
-        return "Small";
+        return "Overweight";
     }
 
     public int GetTotalCost()
     {
         int total = OriginalCost;
-        total += OverweighCost;
+
+       total += OverweighCost;
 
         if (_isSpeedyShipping)
         {
-           total = total * 2;
+            total = total * 2;
         }
 
         return total;
@@ -32,7 +34,6 @@ public class SmallParcel : IParcel
     public void SetSpeedyShipping()
     {
         _isSpeedyShipping = true;
-        _speedyShippingCost = OriginalCost * 2;
     }
 
     public int GetsSpeedyShippingCost()
@@ -42,18 +43,16 @@ public class SmallParcel : IParcel
 
     public int GetLimitDimensionInCm()
     {
-        return 10;
+        throw new NotImplementedException();
     }
 
     public void SetWeightInKg(int weight)
     {
         _weight = weight;
 
-        if (_weight > OverweightInKgLimit)
+        if (_weight >= OverweightInKgLimit)
         {
-            OverweighCost = (_weight - OverweightInKgLimit) * 2;
+            OverweighCost = (_weight - OverweightInKgLimit);
         }
     }
 }
-
-

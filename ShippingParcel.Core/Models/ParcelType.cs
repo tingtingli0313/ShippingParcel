@@ -7,4 +7,5 @@ public enum ParcelType
     Medium,
     Large,
     ExtraLarge,
+    OverWeight,
 }
