@@ -5,5 +5,7 @@
         string GetParcelType();
         int GetTotalCost();
         int GetLimitDimensionInCm();
+        void SetSpeedyShipping();
+        int GetsSpeedyShippingCost();
     }
 }

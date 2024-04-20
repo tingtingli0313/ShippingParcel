@@ -2,14 +2,18 @@
 
 public class MediumParcel : IParcel
 {
+    private bool _isSpeedyShipping { get; set; }
+    private int _speedyShippingCost { get; set; }
+
+    public readonly int _originalCost = 8;
+
+    public MediumParcel()
+    {
+        
+    }
     public int GetLimitDimensionInCm()
     {
         return 50;
-    }
-
-    public int GetOverweightCost()
-    {
-        throw new NotImplementedException();
     }
 
     public string GetParcelType()
@@ -19,6 +23,23 @@ public class MediumParcel : IParcel
 
     public int GetTotalCost()
     {
-        return 8;
+        int total = _originalCost;
+        if (_isSpeedyShipping)
+        {
+            _speedyShippingCost = _originalCost * 2;
+            total += _speedyShippingCost;
+        }
+        return total;
+    }
+
+    public void SetSpeedyShipping()
+    {
+        _isSpeedyShipping = true;
+        _speedyShippingCost = _originalCost * 2;
+    }
+
+    public int GetsSpeedyShippingCost()
+    {
+        return _speedyShippingCost;
     }
 }
